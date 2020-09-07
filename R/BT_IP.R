@@ -37,8 +37,7 @@ BT_IP<-function(nrt,ni,na,data,NC=4,NI=100,data_prior){
 
     dataList <- list(N=N, nr=nr, BCM=BCM, PUS_BMM=informative.prior, sigma=sigma) #  data for Stan model
 
-    BT.model.i <- stan(file="inst\\stan\\BT_estimation.stan",
-                       data=dataList, chains=NC, iter=NI) # run Stan model
+    BT.model.i <- rstan::sampling(stanmodels$BT_estimation, data=dataList, chains=NC, iter=NI) # run Stan model
 
 
     BT.post.i <- rstan::extract(BT.model.i,"BT")$BT      # BT posterior distribution

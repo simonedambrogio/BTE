@@ -54,7 +54,7 @@ BMM_WIP<-function(nrt,ni,na,data,NC=4,NI=100){
     dataList <- list(N=N, nr=nr, BCM=BCM, PUS_BMM= sv_i[[1]], BT=sv_i[[2]], sigma=sigma) # data for Stan model
 
 
-    BMM.model.wi <- stan(file="inst\\stan\\BMM_estimation.stan", data=dataList, chains=NC, iter=NI, init = init_list) # run Stan model
+    BMM.model.wi <- rstan::sampling(stanmodels$BMM_estimation.stan, data=dataList, chains=NC, iter=NI, init = init_list) # run Stan model
 
 
     BMM.post.wi <- rstan::extract(BMM.model.wi,"R_BMM")$R_BMM # BMM posterior distribution

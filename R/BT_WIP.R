@@ -35,8 +35,7 @@ BT_WIP<-function(nrt,ni,na,data,NC=4,NI=100){
 
       dataList <- list(N=N, nr=nr, BCM=BCM, PUS_BMM=weakly.informative.prior, sigma=sigma) # data for Stan model
 
-      BT.model.wi <- stan(file="stan\\BT_estimation.stan",
-                          data=dataList, chains=NC, iter=NI) # run Stan model
+      BT.model.wi <- rstan::sampling(stanmodels$BT_estimation, data=dataList, chains=NC, iter=NI) # run Stan model
 
       BT.post.wi <- rstan::extract(BT.model.wi,"BT")$BT   # BT posterior distribution
       BT.e.wi <- round(apply(BT.post.wi, 2, mean),3)  # BT estimated value

@@ -57,7 +57,7 @@ BMM_IP<-function(nrt,ni,na,data,NC=4,NI=100,data_prior){
     dataList <- list(N=N, nr=nr, BCM=BCM, PUS_BMM= sv_ip[[1]], BT=sv_ip[[2]], sigma=sigma) # data for Stan model
 
 
-    BMM.model.i <- rstan::sampling(stanmodels$BMM_estimation.stan, data=dataList, chains=NC, iter=NI, init = init_list) # run Stan model
+    BMM.model.i <- rstan::sampling(stanmodels$BMM_estimation, data=dataList, chains=NC, iter=NI, init = init_list) # run Stan model
 
 
     BMM.post.i <- rstan::extract(BMM.model.i,"R_BMM")$R_BMM # BMM posterior distribution
